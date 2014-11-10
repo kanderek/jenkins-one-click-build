@@ -1,0 +1,197 @@
+<div id="jenkins-one-click">
+	<style>
+		#jenkins-one-click {
+			position: fixed;
+			bottom: 50px;
+			right: 50px;
+			width: 360px;
+			background-color: rgba(245, 245, 245, 0.7);
+			border-radius: 5px;
+			color: rgb(77,77,77);
+		}
+
+		#jenkins-one-click h1 {
+			margin: 5px;
+		}
+
+		.top-build {
+			cursor: pointer;
+			position: relative;
+			height: 120px;
+			margin-bottom: 5px;
+			background-color: rgb(241,234,232);
+		}
+
+		.rank {
+			float: left;
+			width: 60px;
+			height: 60px;
+			margin: 0;
+			background-color: rgb(241,96,29);
+			color: rgb(245, 245, 245);
+			text-align: center;
+			line-height: 60px;
+			font-size: 30px;
+		}
+
+		.main-details {
+			float: right;
+			width: 285px;
+			line-height: 30px;
+		}
+
+		.main-details p:first-child {
+			font-weight: bold;
+			font-size: 18px;
+		}
+
+		.main-details p {
+			margin: 0;
+			font-size: 16px;
+		}
+		
+		.options {
+			position: absolute;
+			width: 100%;
+			bottom: 6px;
+			background-color: rgba(131,117,109, 0.8);
+		}
+
+		.options p {
+			float: left;
+			display: inline;
+			width: 120px;
+			margin: 0;
+			color: rgb(245, 245, 245);
+			font-size: 12px;
+			line-height: 24px;
+		}
+
+		.total-count {
+			position: absolute;
+			bottom: 0px;
+			height: 6px;
+			width: 100%;
+			background-color: rgb(241,173,29);
+		}
+
+		.percent-count {
+			position: absolute;
+			height: 6px;
+			width: 75%;
+			background-color: rgb(23,167,104);
+		}
+
+		.checkbox {
+			display: inline-block;
+			border: 2px solid rgb(77, 77, 77);
+			width: 15px;
+			height: 15px;
+			margin-left: 3px;
+			vertical-align: middle;
+			line-height: 15px;
+			text-align: center;
+		}
+
+		.hide {
+			display: none;
+		}
+
+		.trashbin {
+			position: absolute;
+			top: 4px;
+			right: 4px;
+			width: 18px;
+			height: 18px;
+			background-size: 18px 18px;
+			/*background-color: pink;*/
+		}
+
+		.clearfix:after {
+			 visibility: hidden;
+			 display: block;
+			 font-size: 0;
+			 content: " ";
+			 clear: both;
+			 height: 0;
+		 }
+
+		.clearfix { display: inline-block; }
+		/* start commented backslash hack \*/
+		* html .clearfix { height: 1%; }
+		.clearfix { display: block; }
+		/* close commented backslash hack */
+
+	</style>
+	<h1>Jenkins Top Builds</h1>
+	<div id="top-build-1" class="top-build">
+		<p class="rank">1</p>
+		<div class="trashbin">
+		</div>
+		<div class="main-details">
+			<p>Last built <span id="last-build-1"><!--4 days ag--></span></p>
+			<p id="branch-1"><!--dev/dkan/S103079-using-sugis-fix--></p>
+			<p id="end-point-1"><!--dkan--></p>
+		</div>
+		<div class="options clearfix">
+			<p><span id="minified-1" class="checkbox"><!--x--></span> Minified?</p>
+			<p><span id="default-1" class="checkbox"></span> Default?</p>
+			<p><span id="release-notes-1" class="checkbox"></span> Release notes?</p> 
+		</div>
+		<div class="total-count">
+			<div class="percent-count">
+			</div>
+		</div>
+	</div>
+
+	<div id="top-build-2" class="top-build">
+		<p class="rank">2</p>
+		<div class="trashbin">
+		</div>
+		<div class="main-details">
+			<p>Last built <span id="last-build-2"><!--4 days ago--></span></p>
+			<p id="branch-2"><!--dev/dkan/S103079-using-sugis-fix-2--></p>
+			<p id="end-point-2"><!--dkan--></p>
+		</div>
+		<div class="options clearfix">
+			<p><span id="minified-2" class="checkbox"><!--x--></span> Minified?</p>
+			<p><span id="default-2" class="checkbox"></span> Default?</p>
+			<p><span id="release-notes-2" class="checkbox"></span> Release notes?</p> 
+		</div>
+		<div class="total-count">
+			<div class="percent-count">
+			</div>
+		</div>
+	</div>
+
+	<div id="top-build-3" class="top-build">
+		<p class="rank">3</p>
+		<div class="trashbin">
+		</div>
+		<div class="main-details">
+			<p>Last built <span id="last-build-3"><!-- 4 days ago--></span></p>
+			<p id="branch-3"><!--dev/dkan/S103079-using-sugis-fix-3--></p>
+			<p id="end-point-3"><!--dkan--></p>
+		</div>
+		<div class="options clearfix">
+			<p><span id="minified-3" class="checkbox"><!--x--></span> Minified?</p>
+			<p><span id="default-3" class="checkbox"> </span> Default?</p>
+			<p><span id="release-notes-3" class="checkbox"> </span> Release notes?</p> 
+		</div>
+		<div class="total-count">
+			<div class="percent-count">
+			</div>
+		</div>
+	</div>
+
+	<script>
+		$(document).ready(function(){
+
+		var trashIconURL = chrome.extension.getURL("src/images/trash/trash.png");
+		$(".trashbin").css("background-image", 'url(' + trashIconURL + ')');
+
+	});
+
+	</script>
+
+</div>

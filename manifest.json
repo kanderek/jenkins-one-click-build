@@ -1,0 +1,42 @@
+{
+  "manifest_version": 2,
+  "name": "Jenkins One Click Build",
+  "version": "0.1",
+
+  "description": "I hate typing out the build information everytime and the autocomplete isn't all that helpful",
+  // "icons": {...},
+
+  "page_action": {},
+
+  "author": "Derek J. Kan",
+
+  "background": {
+    // Recommended
+    "scripts": ["src/js/background.js"],
+    "persistent": false
+  },
+  "content_scripts": [{
+    "matches": ["http://www.google.com/*"],
+    "css": [],
+    "js": [
+      "src/js/lib/require.js",
+      "src/js/lib/jquery-1.11.1.js",
+      "src/js/lib/moment.js",
+      "src/js/content.js"
+    ]
+  }],
+
+  // "import": ...,
+  // "incognito": "spanning or split",
+
+  // "minimum_chrome_version": "versionString",
+  // "optional_permissions": ["tabs"],
+  "permissions": ["tabs"],
+
+  "short_name": "One Click Build",
+
+  "web_accessible_resources": [
+    "src/html/content.html",
+    "src/images/*"
+  ]
+}

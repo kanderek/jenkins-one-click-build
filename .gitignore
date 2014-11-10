@@ -1,0 +1,14 @@
+.DS_Store
+*.psd
+*.ai
+node_modules/
+# Packages
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+.installed.cfg
+lib64
