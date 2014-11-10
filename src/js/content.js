@@ -101,7 +101,7 @@
             var totalCount = 0;
             var tops = 3;
 
-            this.sortSubmissionsBy(allBuilds, 'count');
+            this.sortSubmissionsBy(allBuilds, 'dateTime');
             
             for (var i=0; i < totalBuilds; i++) {
                 totalCount += allBuilds[i].metadata.count;
