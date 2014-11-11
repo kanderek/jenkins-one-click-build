@@ -4,7 +4,7 @@
 			position: fixed;
 			bottom: 50px;
 			right: 50px;
-			width: 360px;
+			width: 400px;
 			background-color: rgba(245, 245, 245, 0.7);
 			border-radius: 5px;
 			color: rgb(77,77,77);
@@ -36,8 +36,8 @@
 
 		.main-details {
 			float: right;
-			width: 285px;
-			line-height: 30px;
+			width: 325px;
+			line-height: 22px;
 		}
 
 		.main-details p:first-child {
@@ -45,10 +45,24 @@
 			font-size: 18px;
 		}
 
-		.main-details p {
+		.main-details a, .main-details p {
+			display: inline-block;
+			width: 100%;
 			margin: 0;
 			font-size: 16px;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
 		}
+
+		.main-details a {
+			color: rgb(77,77,77);
+		}
+
+		.main-details a:hover {
+			color: rgb(241,96,29);
+		}
+
 		
 		.options {
 			position: absolute;
@@ -60,7 +74,7 @@
 		.options p {
 			float: left;
 			display: inline;
-			width: 120px;
+			width: 133px;
 			margin: 0;
 			color: rgb(245, 245, 245);
 			font-size: 12px;
@@ -130,8 +144,8 @@
 		</div>
 		<div class="main-details">
 			<p>Last built <span id="last-build-1"><!--4 days ag--></span></p>
-			<p id="branch-1"><!--dev/dkan/S103079-using-sugis-fix--></p>
-			<p id="end-point-1"><!--dkan--></p>
+			<a id="branch-1" target="_blank"><!--dev/dkan/S103079-using-sugis-fix--></a>
+			<a id="end-point-1" target="_blank"><!--dkan--></a><br>
 		</div>
 		<div class="options clearfix">
 			<p><span id="minified-1" class="checkbox"><!--x--></span> Minified?</p>
@@ -150,8 +164,8 @@
 		</div>
 		<div class="main-details">
 			<p>Last built <span id="last-build-2"><!--4 days ago--></span></p>
-			<p id="branch-2"><!--dev/dkan/S103079-using-sugis-fix-2--></p>
-			<p id="end-point-2"><!--dkan--></p>
+			<a id="branch-2" target="_blank"><!--dev/dkan/S103079-using-sugis-fix-2--></a>
+			<a id="end-point-2" target="_blank"><!--dkan--></a>
 		</div>
 		<div class="options clearfix">
 			<p><span id="minified-2" class="checkbox"><!--x--></span> Minified?</p>
@@ -170,8 +184,8 @@
 		</div>
 		<div class="main-details">
 			<p>Last built <span id="last-build-3"><!-- 4 days ago--></span></p>
-			<p id="branch-3"><!--dev/dkan/S103079-using-sugis-fix-3--></p>
-			<p id="end-point-3"><!--dkan--></p>
+			<a id="branch-3" target="_blank"><!--dev/dkan/S103079-using-sugis-fix-3--></a>
+			<a id="end-point-3" target="_blank"><!--dkan--></a>
 		</div>
 		<div class="options clearfix">
 			<p><span id="minified-3" class="checkbox"><!--x--></span> Minified?</p>

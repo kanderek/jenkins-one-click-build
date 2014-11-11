@@ -3,6 +3,12 @@
     'use strict';
     
     // var $ = require('jquery');
+    var githubBranchUrl = "https://github.snei.sony.com/SNEI/hammerhead-games/tree/";
+    var hammerheadEndpointUrl = "https://hhgames.e1-np.sonyentertainmentnetwork.com/";
+
+    var textInputs = document.querySelectorAll("input[type='text']");
+    var checkboxInputs = document.querySelectorAll("input[type='checkbox']");
+    var submitButton = document.getElementById('yui-gen1-button');
 
     var EXTENSION_NAME = 'jenkins-one-click';
     var selectedBuild = {};
@@ -16,25 +22,48 @@
         $('#' + EXTENSION_NAME).on('click', '> div', function (event) {
             var target = event.currentTarget;
             var clickedElement = event.target;
-            var buildIndex;
+            var buildIndex = target.id.match(/-(\d*)$/)[1];;
 
-            if (target.id.indexOf('top-build-') !== -1) {
-                buildIndex = target.id.match(/-(\d*)$/)[1];
-                selectedBuild = Jenkins.selectExistingBuild(buildIndex);
+            if (clickedElement.id !== 'branch-' + buildIndex && clickedElement.id !== 'end-point-' + buildIndex) {
 
-                if (clickedElement.classList.contains('trashbin')) {
-                    Jenkins.removeBuildFromList(selectedBuild);
-                } else {
-                    Jenkins.storeSubmission(selectedBuild);
+                if (target.id.indexOf('top-build-') !== -1) {
+                    selectedBuild = Jenkins.selectExistingBuild(buildIndex);
+
+                    if (clickedElement.classList.contains('trashbin')) {
+                        Jenkins.removeBuildFromList(selectedBuild);
+                    } else {
+                        Jenkins.setFormValues(selectedBuild);
+                        Jenkins.storeSubmission(selectedBuild);
+                    }
+                    // console.log(Jenkins.getAllFromStorage());
+                    // Jenkins.updateView();
+                    // submitButton.click();
+                    var message = submitButton ? "submit button was clicked" : "submit button is null for some reason";
+                    console.log(message);
                 }
-                console.log(Jenkins.getAllFromStorage());
-                Jenkins.updateView();
             }
         });
+
+        submitButton.addEventListener('click', function (event) {
+            selectedBuild = Jenkins.getFormValues();
+            Jenkins.storeSubmission(selectedBuild);
+            // console.log('submit button clicked');
+            // console.log(Jenkins.getAllFromStorage());
+            // Jenkins.updateView();
+        }, false);
 
     });
 
     var Jenkins = {
+
+        setFormValues: function (submission) {
+
+            textInputs[0].value = submission.branch;
+            textInputs[1].value = submission.endPoint;
+            checkboxInputs[0].checked = submission.minify;
+            checkboxInputs[1].checked = submission.isDefault;
+            checkboxInputs[2].checked = submission.releaseNotes;
+        },
 
         selectExistingBuild: function (buildIndex) {
             var values = {
@@ -50,11 +79,11 @@
 
         getFormValues: function () {
             var values = {
-                    branch: 'branch',
-                    endPoint: 'endPoint',
-                    minify: false,
-                    isDefault: false,
-                    releaseNotes: false,
+                    branch: textInputs[0].value,
+                    endPoint: textInputs[1].value,
+                    minify: checkboxInputs[0].checked,
+                    isDefault: checkboxInputs[1].checked,
+                    releaseNotes: checkboxInputs[2].checked,
                 };
 
             return values;
@@ -79,8 +108,10 @@
             $('#last-build-' + buildIndex).html(relativeBuildTime);
 
             $('#branch-' + buildIndex).html(buildInfo.submission.branch);
+            $('#branch-' + buildIndex).attr('href', githubBranchUrl + buildInfo.submission.branch);
             $('#end-point-' + buildIndex).html(buildInfo.submission.endPoint);
-            
+            $('#end-point-' + buildIndex).attr('href', hammerheadEndpointUrl + buildInfo.submission.endPoint + '/');
+
             x = buildInfo.submission.minify ? 'x' : '';
             $('#minified-' + buildIndex).html(x);
 
@@ -181,7 +212,7 @@
         },
 
         compareDateTime: function (a, b) {
-            return b.metadata.dateTime - a.metadata.dateTime;
+            return b.metadata.lastBuild - a.metadata.lastBuild;
         },
 
         compareCount: function (a, b) {
