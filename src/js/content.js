@@ -1,8 +1,6 @@
-// define(function (require) {
 (function () {
     'use strict';
     
-    // var $ = require('jquery');
     var githubBranchUrl = "https://github.snei.sony.com/SNEI/hammerhead-games/tree/";
     var hammerheadEndpointUrl = "https://hhgames.e1-np.sonyentertainmentnetwork.com/";
 
@@ -25,7 +23,7 @@
 
             if (submitButton !== null) {
                 clearInterval(pollForSubmitButton);
-                setupListeners();    
+                setupListeners();
             }
 
         }, 200);
@@ -36,7 +34,7 @@
         $('#' + EXTENSION_NAME).on('click', '> div', function (event) {
             var target = event.currentTarget;
             var clickedElement = event.target;
-            var buildIndex = target.id.match(/-(\d*)$/)[1];;
+            var buildIndex = target.id.match(/-(\d*)$/)[1];
 
             if (clickedElement.id !== 'branch-' + buildIndex && clickedElement.id !== 'end-point-' + buildIndex) {
 
@@ -246,7 +244,8 @@
         }
     };
 
-    return Jenkins;
+    window.Jenkins = Jenkins;
+    
 })();
 
 

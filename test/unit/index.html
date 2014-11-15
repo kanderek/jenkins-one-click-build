@@ -8,16 +8,27 @@
   </head>
   <body>
     <div id="mocha"></div>
-    <!-- <script src="mocha.js"></script>-->
-    <!--<script>mocha.setup('bdd')</script>-->
-    <!-- // <script src="../../src/js/lib/require.js" data-main="unitTests"></script> -->
+    <script src="../../src/js/lib/jquery-1.11.1.js"></script>
+    <script src="../lib/chrome-mock.js"></script>
+    <script src="../lib/mocha.js"></script>
+    <script src="../lib/chai.js"></script>
+    <script src="../../src/js/content.js"></script>
+    <script>
+      mocha.setup('bdd')
+    </script>
+    <script src="./contentTest.js"></script>
+    <script>
+      if (window.mochaPhantomJS) {
+        mochaPhantomJS.run();
+      }
+      else {
+        mocha.run();
+      }
+
+    </script>
     <script src="http://localhost:35729/livereload.js"></script>
-    <script src="../../src/js/lib/require.js"></script>
     <script> 
-      require(['../../requireConfig'], function() {
-        console.log('require config?');
-        require(['unitTests']);
-      });
+
     </script>
   </body>
 </html>

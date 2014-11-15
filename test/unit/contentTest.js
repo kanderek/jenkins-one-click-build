@@ -1,10 +1,7 @@
-define(function (require) {
+(function () {
 	'use strict';
 
-	var mocha = require('mocha');
-	var should = require('chai').should();
-
-	var contentScript = require('content');
+	var should = chai.should();
 
 	function LocalStorage() {
 		this.localStorage = {};
@@ -34,7 +31,7 @@ define(function (require) {
 
 			it('should place the object as the value and the name of the extension as the key', function() {
 				var object = {'name': 'bob'};
-				var namespacedObject = contentScript.addNameSpace('people', object);
+				var namespacedObject = Jenkins.addNameSpace('people', object);
 
 				namespacedObject['people'].should.be.equal(object);
 			});
@@ -53,7 +50,7 @@ define(function (require) {
 			];
 
 			it('should sort submissions in order of count', function () {
-				contentScript.sortSubmissionsBy(submissions, 'count');
+				Jenkins.sortSubmissionsBy(submissions, 'count');
 				submissions[0].metadata.count.should.be.equal(54);
 				submissions[0].submission.should.be.equal("some key 4");
 
@@ -65,14 +62,14 @@ define(function (require) {
 			var formValues;
 
 			before(function () {
-				// contentScript.getFormValues('develop', 'dkan');
+				// Jenkins.getFormValues('develop', 'dkan');
 				//"{"jenkins-one-click":{"branch":"branch","endPoint":"endPoint","minify":false,"isDefault":false,"releaseNotes":false}}"
 
 			});
 
 			it('should store a new submission if the key is not in localStorage', function () {
 				
-				var submission = contentScript.storeSubmission();
+				var submission = Jenkins.storeSubmission();
 				// console.log(localStorage);
 				var result = localStorage.getItem(submission);
 				// result.count.should.be.equal("1");
@@ -85,4 +82,4 @@ define(function (require) {
 		});
 
 	});
-});
+})();
