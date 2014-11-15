@@ -12,13 +12,27 @@
 
     var EXTENSION_NAME = 'jenkins-one-click';
     var selectedBuild = {};
+    var pollForSubmitButton;
 
     $.get(chrome.extension.getURL('src/html/content.html'), function (injectedHtml) {
         $('body').append(injectedHtml);
         Jenkins.updateView();
 
     }).then(function () {
+ 
+        pollForSubmitButton = setInterval(function () {
+            submitButton = document.getElementById('yui-gen1-button');
 
+            if (submitButton !== null) {
+                clearInterval(pollForSubmitButton);
+                setupListeners();    
+            }
+
+        }, 200);
+
+    });
+
+    var setupListeners = function () {
         $('#' + EXTENSION_NAME).on('click', '> div', function (event) {
             var target = event.currentTarget;
             var clickedElement = event.target;
@@ -31,15 +45,12 @@
 
                     if (clickedElement.classList.contains('trashbin')) {
                         Jenkins.removeBuildFromList(selectedBuild);
+                        Jenkins.updateView();
                     } else {
                         Jenkins.setFormValues(selectedBuild);
                         Jenkins.storeSubmission(selectedBuild);
                     }
-                    // console.log(Jenkins.getAllFromStorage());
-                    // Jenkins.updateView();
-                    // submitButton.click();
-                    var message = submitButton ? "submit button was clicked" : "submit button is null for some reason";
-                    console.log(message);
+                    submitButton.click();
                 }
             }
         });
@@ -47,12 +58,9 @@
         submitButton.addEventListener('click', function (event) {
             selectedBuild = Jenkins.getFormValues();
             Jenkins.storeSubmission(selectedBuild);
-            // console.log('submit button clicked');
-            // console.log(Jenkins.getAllFromStorage());
-            // Jenkins.updateView();
-        }, false);
 
-    });
+        }, false);
+    };
 
     var Jenkins = {
 

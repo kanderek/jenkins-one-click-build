@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Jenkins One Click Build",
-  "version": "0.3",
+  "version": "0.4",
 
   "description": "I hate typing out the build information everytime and the autocomplete isn't all that helpful",
 
