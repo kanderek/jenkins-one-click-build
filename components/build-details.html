@@ -1,0 +1,50 @@
+<link rel="import" href="../lib/polymer/polymer.html">
+
+<polymer-element name="build-details" attributes="lastBuild branch endpoint">
+	<template bind="{{build-details as build-info}}">
+		<!-- Can link to stylesheet here or define styles -->
+		<style>
+			:host {
+				display: block;
+				float: right;
+				/*width: 325px;*/
+				width: 80%;
+				line-height: 22px;
+				margin-bottom: 30px;
+			}
+
+			:host p:first-child {
+				font-weight: bold;
+				font-size: 18px;
+			}
+
+			:host a, :host p {
+				display: inline-block;
+				width: 100%;
+				margin: 0;
+				font-size: 16px;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				overflow: hidden;
+			}
+
+			:host a {
+				color: rgb(77,77,77);
+			}
+
+			:host a:hover {
+				color: rgb(241,96,29);
+			}
+
+		</style>
+
+		<p>Last built <span id="last-build-1">{{lastBuild}}</span></p>
+		<a id="branch-1" target="_blank">{{branch}}</a>
+		<a id="end-point-1" target="_blank">{{endpoint}}</a><br>
+
+	</template>
+	<script>
+		Polymer({
+		});
+	</script>
+</polymer-element>

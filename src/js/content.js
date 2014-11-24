@@ -30,6 +30,22 @@
 
     });
 
+    var getLastTenBuilds = function () {
+        var $lastTenBuilds = $('.build-row:lt(10)');
+        var buildHistory = [];
+        var buildRow = {};
+
+        $lastTenBuilds.each(function () {
+            buildRow.buildTime = $(this).find();
+            if ($(this).hasClass('transitive')) {
+                buildRow.timeLeft = 0;
+            } else {
+
+            }
+        });
+
+    };
+
     var setupListeners = function () {
         $('#' + EXTENSION_NAME).on('click', '> div', function (event) {
             var target = event.currentTarget;
@@ -245,7 +261,7 @@
     };
 
     window.Jenkins = Jenkins;
-    
+
 })();
 
 

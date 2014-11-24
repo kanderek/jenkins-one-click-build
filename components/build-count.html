@@ -1,0 +1,33 @@
+<link rel="import" href="../lib/polymer/polymer.html">
+
+<polymer-element name="build-count" attributes="percent">
+	<template bind="{{build-count as build-info}}">
+		<!-- Can link to stylesheet here or define styles -->
+		<style>
+			:host {
+				display: block;
+				position: absolute;
+				bottom: 0px;
+				height: 6px;
+				width: 100%;
+				background-color: rgb(241,173,29);
+			}
+
+			.percent-count {
+				position: absolute;
+				height: 6px;
+				width: 75%;
+				background-color: rgb(23,167,104);
+			}
+
+		</style>
+
+		<div class="percent-count" style="width:{{percent}}%">
+		</div>
+
+	</template>
+	<script>
+		Polymer({
+		});
+	</script>
+</polymer-element>

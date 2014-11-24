@@ -1,0 +1,80 @@
+<link rel="import" href="../lib/polymer/polymer.html">
+
+<polymer-element name="build-card" attributes="rank build" on-click="notifiyLocalStorage">
+	<template bind="{{build-info}}">
+		<!-- Can link to stylesheet here or define styles -->
+		<style>
+			:host {
+				display: block;
+				cursor: pointer;
+				position: relative;
+				/*height: 120px;*/
+				overflow: auto;
+				background-color: rgb(241,234,232);
+			}
+
+			.rank {
+				float: left;
+				width: 60px;
+				height: 60px;
+				margin: 0;
+				background-color: rgb(241,96,29);
+				color: rgb(245, 245, 245);
+				text-align: center;
+				line-height: 60px;
+				font-size: 30px;
+			}
+
+			.hide {
+				display: none;
+			}
+
+			.trashbin {
+				position: absolute;
+				top: 4px;
+				right: 4px;
+				width: 18px;
+				height: 18px;
+				background-size: 18px 18px;
+				/*background-color: pink;*/
+			}
+
+		</style>
+
+		<p class="rank">{{rank}}</p>
+		<div class="trashbin">
+		</div>
+      	<build-details 
+            branch="{{build.branch}}" 
+            endpoint="{{build.endpoint}}">
+          </build-details>
+          <build-options 
+            minify="{{build.minify}}" 
+            default="{{build.default}}" 
+            releaseNotes="{{build.releaseNotes}}">
+          </build-options>
+          <build-count percent="{{build.percent}}"></build-count>
+
+	</template>
+	<script>
+		Polymer({
+			domReady: function () {
+				// $(document).ready(function(){
+					console.log('build card ready!');
+					// var trashIconURL = chrome.extension.getURL("src/images/trash/trash.png");
+					var trashIconURL = "src/images/trash/trash.png";
+					$(".trashbin").css("background-image", 'url(' + trashIconURL + ')');
+				// });
+			},
+
+			notifiyLocalStorage: function () {
+				this.fire('core-set', 
+					this.build
+				// {
+					// lastBuild: this.$['build-details'].lastBuild
+				// }
+				);
+			} 
+		});
+	</script>
+</polymer-element>

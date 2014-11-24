@@ -1,0 +1,80 @@
+<link rel="import" href="../lib/polymer/polymer.html">
+
+<polymer-element name="build-options" class="clearfix" attributes="minify default releaseNotes">
+	<template bind="{{build-options as build-info}}">
+		<!-- Can link to stylesheet here or define styles -->
+		<style>
+			:host {
+				display: block;
+				position: absolute;
+				width: 100%;
+				bottom: 6px;
+				background-color: rgba(131,117,109, 0.8);
+			}
+
+			:host p {
+				float: left;
+				display: inline;
+				width: 33.3%;
+				margin: 0;
+				color: rgb(245, 245, 245);
+				font-size: 12px;
+				line-height: 24px;
+			}
+
+			.checkbox {
+				display: inline-block;
+				border: 2px solid rgb(77, 77, 77);
+				width: 15px;
+				height: 15px;
+				margin-left: 3px;
+				vertical-align: middle;
+				line-height: 15px;
+				text-align: center;
+			}
+
+			.clearfix:after {
+				 visibility: hidden;
+				 display: block;
+				 font-size: 0;
+				 content: " ";
+				 clear: both;
+				 height: 0;
+			 }
+
+			.clearfix { display: inline-block; }
+			/* start commented backslash hack \*/
+			* html .clearfix { height: 1%; }
+			.clearfix { display: block; }
+			/* close commented backslash hack */
+
+		</style>
+
+		<p><span class="checkbox">{{booleanToX(minify)}}</span> Minified?</p>
+		<p><span class="checkbox">{{booleanToX(default)}}</span> Default?</p>
+		<p><span class="checkbox">{{booleanToX(releaseNotes)}}</span> Release notes?</p> 
+
+	</template>
+	<script>
+		Polymer({
+			booleanToX: function (booleanString) {
+				return this.stringToBoolean(booleanString) ? 'x' : '';
+			},
+
+			stringToBoolean: function (booleanString) {
+
+				if (typeof booleanString === 'boolean') {
+					return booleanString;
+				}
+
+				var convertTo = typeof booleanString === 'string' ? booleanString.toLowerCase() : '';
+
+				if (convertTo === 'true') {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		});
+	</script>
+</polymer-element>
