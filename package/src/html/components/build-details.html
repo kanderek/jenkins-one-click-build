@@ -1,7 +1,7 @@
-<link rel="import" href="../lib/polymer/polymer.html">
+<!-- <link rel="import" href="../lib/polymer/polymer.html"> -->
 
-<polymer-element name="build-details" attributes="lastBuild branch endpoint">
-	<template bind="{{build-details as build-info}}">
+<polymer-element name="build-details" attributes="lastBuild branchUrl branch endpointUrl endpoint">
+	<template>
 		<!-- Can link to stylesheet here or define styles -->
 		<style>
 			:host {
@@ -39,12 +39,15 @@
 		</style>
 
 		<p>Last built <span id="last-build-1">{{lastBuild}}</span></p>
-		<a id="branch-1" target="_blank">{{branch}}</a>
-		<a id="end-point-1" target="_blank">{{endpoint}}</a><br>
+		<a id="branch-1" href="{{githubBranchUrl}}{{branch}}" target="_blank">{{branch}}</a>
+		<a id="end-point-1" href="{{hammerheadEndpointUrl}}{{endpoint}}" target="_blank">{{endpoint}}</a><br>
 
 	</template>
 	<script>
 		Polymer({
+			githubBranchUrl: githubBranchUrl,
+
+    		hammerheadEndpointUrl: hammerheadEndpointUrl
 		});
 	</script>
 </polymer-element>

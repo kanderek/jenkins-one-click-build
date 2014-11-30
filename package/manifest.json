@@ -16,13 +16,19 @@
   "content_scripts": [{
     "matches": [
       "https://ussdisbld01.am.sony.com/view/HHG/job/HHG_OneOff_E1/build?*",
-      "https://ussdisbld01.am.sony.com/job/HHG_OneOff_E1/build?*"
+      "https://ussdisbld01.am.sony.com/job/HHG_OneOff_E1/build?*",
+      "http://localhost:8000/*"
     ],
     "css": [],
     "js": [
-      "src/js/lib/jquery-1.11.1.js"
+      "src/js/lib/jquery-1.11.1.js",
       "src/js/lib/moment.js",
-      "src/js/content.js"
+      "src/js/appConfig.js",
+      "src/js/Jenkins.js",
+      "src/js/lib/polymer/platform/platform.js",
+      "src/js/lib/polymer/polymer.js",
+      "src/js/main.js"
+      // "src/js/content.js"
     ]
   }],
 
@@ -35,6 +41,7 @@
 
   "web_accessible_resources": [
     "src/html/content.html",
+    "src/html/content2.html",
     "src/images/*"
   ]
 }

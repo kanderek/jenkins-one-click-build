@@ -1,0 +1,97 @@
+<!-- <link rel="import" href="../lib/polymer/polymer.html"> -->
+<link rel="import" href="build-card.html">
+<link rel="import" href="build-details.html">
+<link rel="import" href="build-options.html">
+<link rel="import" href="build-count.html">
+
+<polymer-element name="build-list" attributes="max" on-build-action="{{updateList}}">
+  <template>
+    <style>
+    :host {
+      display: block;
+    }
+
+    build-card {
+      margin-bottom: 5px;
+    }
+    </style>
+    
+    <template repeat="{{build, buildIndex in builds | limitToMaxOf}}">
+      <build-card rank="{{buildIndex + 1}}" build="{{build}}">
+      </build-card>
+    </template>
+      
+  </template>
+  <script>
+  Polymer({
+    DEFAULT_MAX: 3,
+
+    // builds: [
+    //   {
+    //     branch: 'dev/dkan/dblkajdljka',
+    //     endpoint: 'dkan',
+    //     minify: true,
+    //     default: false,
+    //     releaseNotes: true,
+    //     percent: 12
+    //   },
+    //   {
+    //     branch: 'dev/dkan/dblkajdljka',
+    //     endpoint: 'dkan',
+    //     minify: true,
+    //     default: false,
+    //     releaseNotes: true,
+    //     percent: 12
+    //   },
+    //   {
+    //     branch: 'dev/dkan/dblkajdljka',
+    //     endpoint: 'dkan',
+    //     minify: true,
+    //     default: false,
+    //     releaseNotes: true,
+    //     percent: 12
+    //   },
+
+    ],
+
+    domReady: function () {
+      console.log('dom ready for build list...');
+      this.updateList();
+    },
+
+    limitToMaxOf: function (value) {
+      var topBuilds = [];
+      var totalBuilds = this.builds.length;
+      var limit = this.max || DEFAULT_MAX;
+
+      limit = totalBuilds > limit ? limit : totalBuilds;
+
+      for (var i=0; i < limit; i++) {
+        topBuilds.push(value[i]);
+      }
+
+      return topBuilds;
+    },
+
+    updateList: function (event, detail, target) {
+      console.log('message received...updateing list');
+
+      var buildData = Jenkins.getAllFromStorage();
+      var totalCount = Jenkins.getTotalBuildCount(buildData);
+
+      Jenkins.sortSubmissionsByTime(buildData);
+
+      this.builds = buildData.map (function (build) {
+        return {
+          branch: build.submission.branch,
+          endpoint: build.submission.endpoint,
+          minify: build.submission.minify,
+          default: build.submission.isDefault,
+          releaseNotes: build.submission.releaseNotes,
+          percent: build.metadata.count / totalCount
+        }
+      });
+    }
+  });
+  </script>
+</polymer-element>

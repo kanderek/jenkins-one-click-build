@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Jenkins Mock Site</title>
+	<style>
+		body {
+			/*line-height: 20px*/
+		}
+
+		.labels {
+			float: left;
+			width: 200px;
+			line-height: 25px;
+		}
+	
+		.inputs {
+			line-height: 25px;
+			float: left;
+			width: 300px;
+		}
+
+		label {
+			width: 100%;
+			display: inline-block;
+		}
+		
+		input {	
+			width: 100%;
+			display: inline-block;
+		}
+
+		button {
+			width: 500px;
+		}
+
+		.wrapper {
+			width: 920px;
+			margin: auto;
+			padding: 20px;
+			background-color: gray;
+		}
+
+		.inner-wrapper {
+			width: 600px;
+			margin: auto;
+		}
+
+		.clearfix:after {
+			 visibility: hidden;
+			 display: block;
+			 font-size: 0;
+			 content: " ";
+			 clear: both;
+			 height: 0;
+		 }
+
+		.clearfix { display: inline-block; }
+		/* start commented backslash hack \*/
+		* html .clearfix { height: 1%; }
+		.clearfix { display: block; }
+		/* close commented backslash hack */
+
+	</style>
+
+</head>
+
+<body>
+
+	<div class="wrapper">
+
+		<div class="inner-wrapper clearfix">
+			<div class="labels">
+				<label for="branch">Github Branch: </label>
+				<label for="endpoint">Hammerhead Endpoint: </label>
+				<label for="minify">Minify?: </label>
+				<label for="default">Is Default?: </label>
+				<label for="releaseNotes">Include Release Notes?: </label>
+			</div>
+
+			<div class="inputs">
+				<input name="branch" type="text">
+				<input name="endpoint" type="text">
+				<input name="minify" type="checkbox">
+				<input name="default" type="checkbox">
+				<input name="releaseNotes" type="checkbox">
+			</div>
+			<button id="yui-gen1-button">Build</button>
+		</div>
+	</div>
+</body>
+</html>

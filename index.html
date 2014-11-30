@@ -5,13 +5,17 @@
 
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
 
-  <script src="lib/polymer/platform/platform.js"></script>
+  <script src="package/src/js/lib/polymer/platform/platform.js"></script>
+  <script src="package/src/js/lib/polymer/polymer.js"></script>
 
-  <link rel="import" href="components/build-list.html">
-  <link rel="import" href="components/build-card.html">
-  <link rel="import" href="components/build-options.html">
-  <link rel="import" href="components/build-details.html">
-  <link rel="import" href="components/build-count.html">
+  <script src="package/src/js/appConfig.js"></script>
+  <script src="package/src/js/Jenkins.js"></script>
+  
+  <link rel="import" href="package/src/html/components/build-list.html">
+  <link rel="import" href="package/src/html/components/build-card.html">
+  <link rel="import" href="package/src/html/components/build-options.html">
+  <link rel="import" href="package/src/html/components/build-details.html">
+  <link rel="import" href="package/src/html/components/build-count.html">
 
   <style>
 
@@ -24,7 +28,7 @@
     <build-list max='2'>
     </build-list>
     
-    <script src="src/js/lib/jquery-1.11.1.js"></script>
+    <script src="package/src/js/lib/jquery-1.11.1.js"></script>
     <script>
     </script>
 </body>

@@ -1,7 +1,7 @@
-<link rel="import" href="../lib/polymer/polymer.html">
+<!-- <link rel="import" href="../lib/polymer/polymer.html"> -->
 
-<polymer-element name="build-card" attributes="rank build" on-click="notifiyLocalStorage">
-	<template bind="{{build-info}}">
+<polymer-element name="build-card" attributes="rank build" on-click="updateLocalStorage">
+	<template>
 		<!-- Can link to stylesheet here or define styles -->
 		<style>
 			:host {
@@ -42,7 +42,7 @@
 		</style>
 
 		<p class="rank">{{rank}}</p>
-		<div class="trashbin">
+		<div class="trashbin" style="{{trashIcon}}">
 		</div>
       	<build-details 
             branch="{{build.branch}}" 
@@ -58,23 +58,33 @@
 	</template>
 	<script>
 		Polymer({
+			trashIcon: 'background-image: url("src/images/trash/trash.png")',
+
 			domReady: function () {
 				// $(document).ready(function(){
 					console.log('build card ready!');
 					// var trashIconURL = chrome.extension.getURL("src/images/trash/trash.png");
-					var trashIconURL = "src/images/trash/trash.png";
-					$(".trashbin").css("background-image", 'url(' + trashIconURL + ')');
+					// var trashIconURL = "src/images/trash/trash.png";
+					// $(".trashbin").css('background-image', 'url(' + trashIconURL + ')');
 				// });
 			},
 
-			notifiyLocalStorage: function () {
-				this.fire('core-set', 
-					this.build
-				// {
-					// lastBuild: this.$['build-details'].lastBuild
-				// }
-				);
-			} 
+			updateLocalStorage: function (event, detail, target) {
+				console.log('build-card clicked');
+				var clickedTag = event.path[0].tagName.toLowerCase();
+				var clickedTrashbin = event.path[0].classList.contains('trashbin');
+
+				if (clickedTag !== 'a') {
+					if (clickedTrashbin) {
+						// Jenkins.removeBuildFromList(this.build);
+						console.log('trash clicked');
+					} else {
+						console.log('store a build');
+						// Jenkins.storeSubmission(this.build);
+					}
+					this.fire('build-action');
+				}
+			}
 		});
 	</script>
 </polymer-element>
